@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>Ticket Detail</title>
+   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+   <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+   <h1>Mobile Ticket Viewer</h1>
+
+   <a href="/ticket/list" class="btn btn-info" role="button">Back to all tickets</a>
+
+   <div class="row">
+
+      <div class="col-md-3" style="background-color: #dedef8;box-shadow:
+         inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+         <h2>Requester</h2>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Requests
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <img src={{user.photo.mapped_content_url}} class="img-thumbnail">
+                    <h4>{{user.name}}</h4>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Assignee
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    {{assignee.email}}
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Tags
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    {% for tag in ticket.tags %}
+                        <span class="label label-default">{{tag}}</span>
+                    {% endfor %}
+                </div>
+            </div>
+      </div>
+
+      <div class="col-md-9" style="background-color: #dedef8;box-shadow:
+         inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
+         <h4>{{ticket.subject}}</h4>
+          <hr>
+         <div>
+             <h3 style="white-space: pre-line">{{ticket.description}}</h3>
+         </div>
+
+
+      </div>
+
+   </div>
+
+</div>
+
+</body>
+</html>

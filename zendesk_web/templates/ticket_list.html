@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static  %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ticket list</title>
+</head>
+<link rel="stylesheet" href="../static/jqueryPagination/css/jquery.pagination.css">
+<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<body>
+    <h1>Mobile Ticket Viewer</h1>
+    <table style="width: 1000px;" class="table table-striped table-hover table-bordered" >
+        <tr>
+            <th>ID</th>
+            <th>Subject</th>
+            <th>Type</th>
+            <th>UpdateTime</th>
+            <th>Priority</th>
+            <th>Status</th>
+        </tr>
+        {% for ticket in page.object_list %}
+            <tr>
+                <td>{{ ticket.id }}</a></td>
+                <td> <a href="/ticket/detail/{{ticket.id}}">{{ ticket.subject }}</td>
+                <td>{{ ticket.type }}</td>
+                <td>{{ ticket.updated_at }}</td>
+                <td>{{ ticket.priority }}</td>
+                <td>{{ ticket.status }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div id="pagination3"></div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="{% static 'jqueryPagination/js/jquery.pagination.min.js' %}"></script>
+
+<script>
+
+    $("#pagination3").pagination({
+       currentPage: {{ page.number }},// 当前页数
+       totalPage: {{ total_page }},// 总页数
+       isShow: true,// 是否显示首尾页
+       count: 10,// 显示个数
+       homePageText: "First",// 首页文本
+       endPageText: "Last",// 尾页文本
+       prevPageText: "Next",// 上一页文本
+       nextPageText: "Previous",// 下一页文本
+       callback: function(current) {
+            window.location.href="{% url 'ticket_list' %}"+"?cur_page_num="+current
+       }
+});
+
+
+
+</script>
+
+</html>
